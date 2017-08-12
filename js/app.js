@@ -295,6 +295,15 @@ function showPlaceInfo(place) {
 }
 
 
+// This function will automatically stops marker animation
+// After 3 seconds
+function setTimer(marker) {
+	setTimeout(function() {
+		marker.setAnimation(null);
+	}, 3000);
+}
+
+
 // This function close all of the infoWindows
 function closeInfoWindows() {
 	for(var i=0; i<this.infoWindowArray().length; i++) {
