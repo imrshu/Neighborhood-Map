@@ -210,6 +210,88 @@ function showPlaceInfo(place) {
 	(!streetViewApiPoint) ?
 	self.venue_pic('No Image Avaibale') :
 	self.venue_pic(streetViewApiPoint);
+	
+	// FourSquare Credentials
+	var foursquareClientId = 'TVX3WTBPLLE0DCFBNS0X3UESFS01RNCQZEJOWTDUZ2DGIAZM';
+	var foursquareClientSecret = 'UHB04D40NMQL4BWSFOXQURO3WVVUQA0INOAUAETPYVE5IQAO';
+
+	// FourSquare api-endpoint
+	var fourSquareApiPoint = 'https://api.foursquare.com/v2/venues/' + place.venue_id +
+	'?client_id=' + foursquareClientId + '&client_secret=' + foursquareClientSecret +
+	'&v=20170808';
+
+	// making AJAX request to foursquare API
+	$.ajax({
+		type: 'GET',
+		url: fourSquareApiPoint,
+		processData: false,
+		
+	})
+	// If request succeeds done method gets called
+	.done(function(data) {
+			var place = data.response.venue;
+			var address = place.location.formattedAddress;
+			var contact = place.contact.phone;
+
+			// Set the venue details
+			self.venue_name(place.name);
+			self.venue_likes(place.likes.count);
+			self.venue_rating(place.rating);
+			
+			var place_address = '';
+			address.forEach(function(address) {
+				place_address += address + ' ';
+			});
+
+			// Set venue address
+			self.venue_address(place_address);
+
+			// Check if there is not contact available of the place
+			// If available set it
+			(contact === undefined)?
+			self.venue_contact('NA'):
+			self.venue_contact(contact.replace('+91', '0'));
+
+			// Calling closeInfoWindows to close infoWindows
+			closeInfoWindows();
+
+			// Creating an DOM node for the content of infowindow
+			var place_info = '';
+
+			place_info += '<div id="place_info">';
+			place_info += '<h2>' + self.venue_name() + '</h2>';
+			place_info += '<img src='+ self.venue_pic() +'>';
+			place_info += '<p>Address- '+ self.venue_address() +'</p>';
+			place_info += '<p>Likes- '+ self.venue_likes() +'</p>';
+			place_info += '<p>Rating- '+ self.venue_rating() +'</p>';
+			place_info += '<p>Contact No- '+ self.venue_contact() +'</p>';
+			place_info += '</div>';
+
+			// Creating instance of infowindow
+			var infoWindow = new google.maps.InfoWindow({
+				content: place_info,
+				position: {lat: lat, lng: lng},
+				maxWidth: 300
+			});
+
+			// Pushing each of the infowindow to infoWindowArray
+			self.infoWindowArray.push(infoWindow);
+
+			// This will open infowindow on its marker
+			infoWindow.open(map);
+
+			// This will set search bar field to be empty once a list item is clicked
+			self.filter('');
+
+		    // Make sure the marker property is cleared if the infowindow is closed.
+		    infoWindow.addListener('closeclick', function() {
+		      this.marker = null;
+		    });
+	})
+	// If request fails this function gets called
+	.fail(function(error) {
+		fourSquareAPIError();
+	});
 }
 
 
