@@ -169,6 +169,50 @@ function makeMarkerIcon(markerColor) {
 }
 
 
+// This function gets all information about a venue from foursquare & google api
+// And stores them in knockout observables also shows information in infowindow
+function showPlaceInfo(place) {
+	var self = this;
+
+	// This variable will store current clicked marker
+	var clickedMarker;
+
+	// This iteration is to find out which marker gets clicked
+	for(var i=0; i<self.markerArray().length; i++) {
+		if(self.markerArray()[i].placeId === place.venue_id) {
+			clickedMarker = self.markerArray()[i];
+		}
+	}
+
+	// Check if clicked marker is animated
+	// Set it to Null else Set it to Bounce
+	if(clickedMarker.getAnimation() !== null) {
+		clickedMarker.setAnimation(null);
+	} else {
+		clickedMarker.setAnimation(google.maps.Animation.BOUNCE);
+		setTimer(clickedMarker);
+	}
+
+	// Grabbing the coordinates of the place
+	var lat = place.location.lat;
+
+	var lng = place.location.lng;
+
+	// Google street view api key
+	var streetviewAPI = 'AIzaSyAJMGmn6aVOI32_ckijPm231lO8ySuAc7w';
+
+	// Google street view api-endpoint
+	var streetViewApiPoint = 'https://maps.googleapis.com/maps/api/streetview?' +
+	'size=300x300&location='+ lat + ',' + lng + '&heading=100&pitch=10&scale=2' +
+	'&key=' + streetviewAPI;
+
+	// Check if no image available
+	(!streetViewApiPoint) ?
+	self.venue_pic('No Image Avaibale') :
+	self.venue_pic(streetViewApiPoint);
+}
+
+
 // Applying bindings of view with model
 ko.applyBindings(viewModel);
 
