@@ -109,6 +109,51 @@ function viewModel() {
 }
 
 
+// This function shows up all of the markers on the map
+function showMarkers() {
+	var self = this;
+
+	for(var i=0; i<self.markerArray().length; i++) {
+		self.markerArray()[i].setVisible(true);
+		self.markerArray()[i].setAnimation(null);
+		self.markerArray()[i].setIcon(defaultIcon);
+	}
+}
+
+
+// This function hides an specific marker
+function showFilteredMarker(place) {
+	var self = this;
+
+	closeInfoWindows();
+
+	for(var i=0; i<self.markerArray().length; i++) {
+		if(self.markerArray()[i].placeId === place.venue_id) {
+			self.markerArray()[i].setVisible(true);
+			self.markerArray()[i].setAnimation(google.maps.Animation.BOUNCE);
+			self.markerArray()[i].setIcon(self.highLightedIcon); 
+		    map.setCenter(self.markerArray()[i].getPosition());
+		}
+	}
+}
+
+
+// This function hides an specific marker
+function hideFilteredMarker(place) {
+	var self = this;
+
+	closeInfoWindows();
+
+	for(var i=0; i<self.markerArray().length; i++) {
+		if(self.markerArray()[i].placeId === place.venue_id) {
+			self.markerArray()[i].setVisible(false);
+			self.markerArray()[i].setAnimation(null);
+			self.markerArray()[i].setIcon(self.defaultIcon);
+		}
+	}
+}
+
+
 // Applying bindings of view with model
 ko.applyBindings(viewModel);
 
