@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Title of the page -->
+	<title>Neighbourhood Google Maps</title>
+	<!-- This tells the brower how to download read this page -->
+	<meta charset="utf-8">
+	<!-- Defines the viewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- W3schools Css & fonts -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Header -->
+<header>
+	<div class="row" id="navbar">
+		<i class="fa fa-bars" aria-hidden="true" id="hamburger"></i>
+		<h1>Neighbourhood</h1>
+	</div>
+</header> <!-- // Header Ends -->
+
+
+<!-- Side navbar -->
+<aside class="close" id="sidebar">
+  <!-- Search Box -->
+  <div id="searchbar">
+    <input type="text" id="searchbox" placeholder="Search a place here ..."
+    data-bind="textInput: filter">
+  </div> <!-- // Search box ends -->
+
+  <!-- List View -->
+  <ul data-bind="foreach: results">
+    <li data-bind="text: name, click: getplaceInfo"></li>
+  </ul> <!-- // List View ends -->
+</aside>
+
+
+<!-- This area displays the google map -->
+<main id="map"></main>  
+
+
+</body>
+</html>
