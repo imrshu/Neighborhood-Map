@@ -14,4 +14,6 @@ Neighbourhood map is a single page web application based on MVVM (Model-View-Vie
 3. Open **index.html** file.
 4. Done, Site will automatically be open in a web browser.
 
+![Project Image](https://goo.gl/vu1PTi)
+
 This project is a part of FSND (**udacity**) 
