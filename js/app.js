@@ -295,6 +295,14 @@ function showPlaceInfo(place) {
 }
 
 
+// This function close all of the infoWindows
+function closeInfoWindows() {
+	for(var i=0; i<this.infoWindowArray().length; i++) {
+		this.infoWindowArray()[i].close();
+	}
+}
+
+
 // Applying bindings of view with model
 ko.applyBindings(viewModel);
 
