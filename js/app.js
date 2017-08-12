@@ -303,3 +303,9 @@ ko.applyBindings(viewModel);
 function googleAPIError() {
 	alert("Sorry Google Map can't be loaded");
 }
+
+
+// This function gets called when browser can't load foursquare api 
+function fourSquareAPIError() {
+	alert('Sorry Four Sqaure data cannot be loaded');
+}
