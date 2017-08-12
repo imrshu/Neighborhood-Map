@@ -1,0 +1,124 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+
+.row {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+
+.col-3 {
+	width: 25%;
+}
+
+
+.col-4 {
+	width: 33.33%;
+}
+
+
+.col-6 {
+	width: 50%;
+}
+
+
+.col-8 {
+	width: 66.67%;
+}
+
+
+.col-10 {
+	width: 83.33%;
+}
+
+
+.col-12 {
+	width: 100%;
+}
+
+
+#hamburger {
+	padding: 8px 15px;
+	font-size: 22px;
+}
+
+
+#navbar {
+	background-color: #122529;
+	padding: 2px 2px;
+	color: #e8e8e8;
+}
+
+
+#sidebar {
+    width: 250px;
+    height: 633px;
+    background-color: #e8e8e8;
+    transition: transform 0.3s ease;
+    overflow: auto;
+    text-align: left;
+    padding: 2px 1px;
+}
+
+
+#sidebar.open {
+	transform: translate(0,0);
+	z-index: 2;
+}
+
+
+#sidebar.close {
+	transform: translate(-300px,0);
+}
+
+
+#sidebar ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+
+#sidebar ul li {
+	display: block;
+	padding: 10px 10px;
+	font-size: 20px;
+	color: black;
+}
+
+
+#sidebar ul li:hover {
+	cursor: pointer;
+	background-color: #d2cece;
+}
+
+
+input {
+	padding: 10px 5px;
+	font-size: 18px;
+	border: 2px solid grey;
+	margin-bottom: 4px;
+}
+
+
+#map {
+	height: 633px;
+}
+
+
+#place_info {
+	padding: 2px 4px;
+	overflow: auto;
+}
+
+
+@media screen and (min-width: 250px) {
+    #sidebar {
+        position: absolute;
+    }
+}
