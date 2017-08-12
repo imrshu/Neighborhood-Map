@@ -78,7 +78,36 @@ function viewModel() {
 	this.venue_likes = ko.observable();
 	this.venue_contact = ko.observable();
 	this.venue_address = ko.observable();
+	// iterating over Model array & push objects into places array
+	model.forEach(function(places) {
+		this.places.push(places);
+	});
+
+	// This Will filter our array along with markers on the map
+	this.results = ko.computed(function() {
+		var filter = this.filter();
+		if(!filter) {
+			showMarkers();			
+			return this.places();
+		} else {
+			return ko.utils.arrayFilter(model, function(place) {
+				if(place.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+					showFilteredMarker(place);
+					return place;
+				} else {
+					hideFilteredMarker(place);
+				}
+				
+			});
+		}
+	}, this);
+
+	// This function gets called when each of the list view item clicked
+	this.getplaceInfo = function(place) {
+		showPlaceInfo(place);
+	};
 }
+
 
 // Applying bindings of view with model
 ko.applyBindings(viewModel);
