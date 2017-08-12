@@ -59,3 +59,26 @@ function addMarkers(place) {
 			showPlaceInfo(place);
 		});
 }
+
+
+// @constructor
+function viewModel() {
+	// Knockout observable arrays
+	this.markerArray = ko.observableArray([]);
+	this.infoWindowArray = ko.observableArray([]);
+	this.places = ko.observableArray([]);
+
+	// search bar observable
+	this.filter = ko.observable();
+
+	// Infowindow display area knockout observables
+	this.venue_name = ko.observable();
+	this.venue_pic = ko.observable();
+	this.venue_rating = ko.observable();
+	this.venue_likes = ko.observable();
+	this.venue_contact = ko.observable();
+	this.venue_address = ko.observable();
+}
+
+// Applying bindings of view with model
+ko.applyBindings(viewModel);
