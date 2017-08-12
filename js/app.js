@@ -82,3 +82,9 @@ function viewModel() {
 
 // Applying bindings of view with model
 ko.applyBindings(viewModel);
+
+
+// This function gets called when browser can't load the map.
+function googleAPIError() {
+	alert("Sorry Google Map can't be loaded");
+}
